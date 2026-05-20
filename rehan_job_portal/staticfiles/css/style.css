@@ -1,0 +1,65 @@
+body {
+    background:#f5f6fa;
+    font-family:Segoe UI;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width:250px;
+    height:100vh;
+    background:linear-gradient(180deg,#4e1cac,#6a11cb);
+}
+
+.menu {
+    display:block;
+    color:white;
+    padding:10px;
+    text-decoration:none;
+    border-radius:10px;
+    margin-bottom:10px;
+}
+
+.menu:hover {
+    background:rgba(255,255,255,0.2);
+}
+
+/* TOPBAR */
+.topbar {
+    background:white;
+}
+
+.search {
+    width:300px;
+    border-radius:20px;
+}
+
+/* CARD */
+.card {
+    border-radius:15px;
+}
+
+/* LOGIN PAGE */
+
+.login-body {
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#4e1cac,#6a11cb);
+}
+
+.login-box {
+    width:350px;
+    padding:30px;
+    background:white;
+    border-radius:15px;
+    box-shadow:0px 8px 20px rgba(0,0,0,0.2);
+}
+
+.login-box input {
+    border-radius:20px;
+}
+
+.login-btn {
+    border-radius:20px;
+}
