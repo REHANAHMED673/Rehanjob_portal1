@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">Companies</h2>
+
+<div class="row">
+
+{% for company in companies %}
+
+<div class="col-md-4 mb-4">
+
+<div class="card shadow-sm p-3">
+
+<h5>{{ company.name }}</h5>
+
+<p>
+<i class="bi bi-geo-alt"></i>
+{{ company.location }}
+</p>
+
+<p class="text-muted">
+{{ company.description }}
+</p>
+
+</div>
+
+</div>
+
+{% empty %}
+
+<p>No companies available.</p>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

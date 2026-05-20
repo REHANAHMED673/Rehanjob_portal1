@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4 fw-bold">My Applications</h2>
+
+<div class="row">
+
+{% for app in applications %}
+
+<div class="col-md-6 mb-4">
+
+<div class="card shadow-sm border-0 h-100 app-card">
+
+<div class="card-body">
+
+    <!-- Job Title -->
+    <h5 class="fw-bold mb-2">{{ app.job.title }}</h5>
+
+    <!-- Company -->
+    <p class="text-muted mb-1">
+        <i class="bi bi-building"></i>
+        {{ app.job.company.name }}
+    </p>
+
+    <!-- Location -->
+    <p class="mb-1">
+        <i class="bi bi-geo-alt"></i>
+        {{ app.job.location }}
+    </p>
+
+    <!-- User Info -->
+    <hr>
+
+    <p class="mb-1"><strong>Name:</strong> {{ app.full_name }}</p>
+    <p class="mb-1"><strong>Email:</strong> {{ app.email }}</p>
+    <p class="mb-2"><strong>Phone:</strong> {{ app.phone }}</p>
+
+    <!-- Cover Letter -->
+    {% if app.cover_letter %}
+    <p class="text-muted small">
+        <strong>Cover Letter:</strong> {{ app.cover_letter|truncatewords:20 }}
+    </p>
+    {% endif %}
+
+    <!-- Resume -->
+    {% if app.resume %}
+    <p>
+        <a href="{{ app.resume.url }}" class="btn btn-outline-primary btn-sm" target="_blank">
+            <i class="bi bi-file-earmark-text"></i> View Resume
+        </a>
+    </p>
+    {% endif %}
+
+    <!-- Applied Date -->
+    <p class="text-muted small mb-2">
+        Applied on: {{ app.applied_at|date:"d M Y" }}
+    </p>
+
+    <!-- Status -->
+    <p>
+        Status:
+        {% if app.status == "Pending" %}
+            <span class="badge bg-warning text-dark">Pending</span>
+        {% elif app.status == "Accepted" %}
+            <span class="badge bg-success">Accepted</span>
+        {% elif app.status == "Rejected" %}
+            <span class="badge bg-danger">Rejected</span>
+        {% else %}
+            <span class="badge bg-info">Reviewed</span>
+        {% endif %}
+    </p>
+
+</div>
+
+<!-- Footer -->
+<div class="card-footer bg-white border-0 d-flex justify-content-between">
+
+    <a href="/jobs/" class="btn btn-outline-secondary btn-sm">
+        <i class="bi bi-arrow-left"></i> Browse Jobs
+    </a>
+
+    <a href="{% url 'apply' app.job.id %}" class="btn btn-primary btn-sm">
+        Apply Again
+    </a>
+
+</div>
+
+</div>
+
+</div>
+
+{% empty %}
+
+<div class="col-12">
+    <div class="alert alert-info text-center">
+        You haven't applied to any jobs yet.
+    </div>
+</div>
+
+{% endfor %}
+
+</div>
+
+<!-- STYLE -->
+<style>
+
+.app-card {
+    border-radius: 14px;
+    transition: all 0.3s ease;
+}
+
+.app-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+.badge {
+    font-size: 12px;
+    padding: 6px 10px;
+    border-radius: 10px;
+}
+
+</style>
+
+{% endblock %}

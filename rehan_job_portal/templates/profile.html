@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+<!-- PROFILE HEADER -->
+<div class="card shadow-sm border-0 mb-4 profile-header">
+
+    <div class="p-4 d-flex align-items-center justify-content-between">
+
+        <div class="d-flex align-items-center">
+
+            <!-- Profile Image -->
+            <img src="{{ profile.profile_pic.url }}" 
+                 class="profile-avatar me-4">
+
+            <!-- User Info -->
+            <div>
+                <h3 class="mb-1 fw-bold">{{ user.username }}</h3>
+                <p class="mb-1">{{ user.email }}</p>
+                <small>User ID: {{ user.id }}</small>
+            </div>
+
+        </div>
+
+        <!-- Edit Button -->
+        <a href="/edit-profile/" class="btn btn-light btn-sm">
+            <i class="bi bi-pencil"></i> Edit Profile
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- STATS -->
+<div class="row g-4 mb-4">
+
+    <div class="col-md-4">
+        <div class="card stat-card p-3 shadow-sm">
+            <h6>Applications</h6>
+            <h2>{{ applied_jobs }}</h2>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card stat-card p-3 shadow-sm">
+            <h6>Saved Jobs</h6>
+            <h2>{{ saved_jobs }}</h2>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card stat-card p-3 shadow-sm">
+            <h6>Profile Strength</h6>
+            <h2>
+                {% if profile.bio and profile.skills and profile.experience %}
+                    90%
+                {% else %}
+                    50%
+                {% endif %}
+            </h2>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- ABOUT -->
+<div class="card shadow-sm border-0 mb-4 p-4">
+
+    <h5 class="fw-bold mb-3">About</h5>
+
+    {% if profile.bio %}
+        <p class="text-muted">{{ profile.bio }}</p>
+    {% else %}
+        <p class="text-muted">Add your bio from edit profile.</p>
+    {% endif %}
+
+</div>
+
+
+<!-- SKILLS -->
+<div class="card shadow-sm border-0 mb-4 p-4">
+
+    <h5 class="fw-bold mb-3">Skills</h5>
+
+    {% if profile.skills %}
+        {% for skill in profile.skills.split %}
+            <span class="badge bg-primary me-2 mb-2">{{ skill }}</span>
+        {% endfor %}
+    {% else %}
+        <p class="text-muted">Add skills in profile.</p>
+    {% endif %}
+
+</div>
+
+
+<!-- EXPERIENCE -->
+<div class="card shadow-sm border-0 mb-4 p-4">
+
+    <h5 class="fw-bold mb-3">Experience</h5>
+
+    {% if profile.experience %}
+        <p class="text-muted">{{ profile.experience }}</p>
+    {% else %}
+        <p class="text-muted">Add experience in profile.</p>
+    {% endif %}
+
+</div>
+
+
+<!-- RESUME -->
+<div class="card shadow-sm border-0 mb-4 p-4">
+
+    <h5 class="fw-bold mb-3">Resume</h5>
+
+    {% if profile.resume %}
+        <a href="{{ profile.resume.url }}" target="_blank" class="btn btn-success">
+            <i class="bi bi-file-earmark"></i> View Resume
+        </a>
+    {% else %}
+        <p class="text-muted">No resume uploaded.</p>
+    {% endif %}
+
+</div>
+
+
+<!-- RECENT ACTIVITY -->
+<div class="card shadow-sm border-0 p-4">
+
+    <h5 class="fw-bold mb-3">Recent Applications</h5>
+
+    {% for app in recent_apps %}
+
+    <div class="d-flex justify-content-between border-bottom py-2">
+
+        <div>
+            <strong>{{ app.job.title }}</strong><br>
+            <small class="text-muted">{{ app.job.company.name }}</small>
+        </div>
+
+        <div>
+            {% if app.status == "Pending" %}
+                <span class="badge bg-warning text-dark">Pending</span>
+            {% elif app.status == "Accepted" %}
+                <span class="badge bg-success">Accepted</span>
+            {% elif app.status == "Rejected" %}
+                <span class="badge bg-danger">Rejected</span>
+            {% endif %}
+        </div>
+
+    </div>
+
+    {% empty %}
+        <p class="text-muted">No applications yet.</p>
+    {% endfor %}
+
+</div>
+
+</div>
+
+
+<!-- STYLE -->
+<style>
+
+.profile-header {
+    border-radius: 15px;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+}
+
+.profile-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid white;
+}
+
+.stat-card {
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+}
+
+</style>
+
+{% endblock %}

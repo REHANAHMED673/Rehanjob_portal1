@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3 class="mb-4">Notifications</h3>
+
+<div class="card p-3 shadow-sm">
+
+{% for n in notifications %}
+
+<div class="border-bottom py-2">
+
+    <p class="mb-1">{{ n.message }}</p>
+    <small class="text-muted">{{ n.created_at|date:"d M Y H:i" }}</small>
+
+</div>
+
+{% empty %}
+
+<p class="text-muted">No notifications yet</p>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

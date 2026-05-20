@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container" style="max-width:700px;">
+
+<div class="card shadow-lg border-0 p-4">
+
+    <!-- Title -->
+    <h3 class="mb-3 fw-bold text-center">
+        Apply for <span class="text-primary">{{ job.title }}</span>
+    </h3>
+
+    <p class="text-center text-muted mb-4">
+        Fill your details carefully before submitting
+    </p>
+
+    <!-- Form -->
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Full Name -->
+        <div class="mb-3">
+            <label class="form-label fw-semibold">Full Name</label>
+            <input type="text" name="full_name" class="form-control form-control-lg" placeholder="Enter your full name" required>
+        </div>
+
+        <!-- Email -->
+        <div class="mb-3">
+            <label class="form-label fw-semibold">Email Address</label>
+            <input type="email" name="email" class="form-control form-control-lg" placeholder="Enter your email" required>
+        </div>
+
+        <!-- Phone -->
+        <div class="mb-3">
+            <label class="form-label fw-semibold">Phone Number</label>
+            <input type="text" name="phone" class="form-control form-control-lg" placeholder="Enter your phone number" required>
+        </div>
+
+        <!-- Cover Letter -->
+        <div class="mb-3">
+            <label class="form-label fw-semibold">Cover Letter</label>
+            <textarea name="cover_letter" class="form-control" rows="4" placeholder="Write your cover letter (optional)"></textarea>
+        </div>
+
+        <!-- Resume -->
+        <div class="mb-4">
+            <label class="form-label fw-semibold">Upload Resume</label>
+            <input type="file" name="resume" class="form-control" required>
+        </div>
+
+        <!-- Buttons -->
+        <div class="d-flex justify-content-between">
+
+            <a href="/jobs/" class="btn btn-outline-secondary">
+                ← Back
+            </a>
+
+            <button type="submit" class="btn btn-success px-4">
+                Submit Application
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+</div>
+
+{% endblock %}

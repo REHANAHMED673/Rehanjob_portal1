@@ -1,0 +1,219 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Login | Rehan Job Portal</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+
+background: linear-gradient(135deg,#4b0082,#8a2be2,#6a11cb,#2575fc);
+background-size:400% 400%;
+
+animation: gradientMove 10s ease infinite;
+
+}
+
+/* background animation */
+
+@keyframes gradientMove{
+
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+
+}
+
+
+/* login card */
+
+.login-card{
+
+width:380px;
+
+padding:40px;
+
+border-radius:20px;
+
+background:rgba(255,255,255,0.15);
+
+backdrop-filter: blur(15px);
+
+box-shadow:0 15px 35px rgba(0,0,0,0.3);
+
+animation:fadeIn 1s ease;
+
+}
+
+@keyframes fadeIn{
+
+from{
+opacity:0;
+transform:translateY(40px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+.login-title{
+
+text-align:center;
+font-size:28px;
+font-weight:600;
+color:white;
+margin-bottom:25px;
+
+}
+
+.input-group{
+
+position:relative;
+margin-bottom:18px;
+
+}
+
+.input-group i{
+
+position:absolute;
+top:50%;
+left:15px;
+transform:translateY(-50%);
+color:#777;
+
+}
+
+.input-group input{
+
+width:100%;
+padding:12px 12px 12px 40px;
+
+border:none;
+border-radius:30px;
+
+outline:none;
+
+background:white;
+
+transition:0.3s;
+
+}
+
+.input-group input:focus{
+
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+
+}
+
+.login-btn{
+
+width:100%;
+padding:12px;
+
+border:none;
+border-radius:30px;
+
+background:linear-gradient(45deg,#1d72f3,#3ea3ff);
+
+color:white;
+
+font-size:16px;
+
+cursor:pointer;
+
+transition:0.3s;
+
+}
+
+.login-btn:hover{
+
+transform:translateY(-2px);
+box-shadow:0 6px 20px rgba(0,0,0,0.3);
+
+}
+
+.register{
+
+text-align:center;
+margin-top:18px;
+color:white;
+
+}
+
+.register a{
+
+color:white;
+font-weight:600;
+text-decoration:none;
+
+}
+
+.register a:hover{
+
+text-decoration:underline;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="login-card">
+
+<div class="login-title">
+<i class="bi bi-shield-lock"></i> Login
+</div>
+
+<form method="POST">
+
+{% csrf_token %}
+
+<div class="input-group">
+<i class="bi bi-person"></i>
+<input type="text" name="username" placeholder="Username" required>
+</div>
+
+<div class="input-group">
+<i class="bi bi-lock"></i>
+<input type="password" name="password" placeholder="Password" required>
+</div>
+
+<button type="submit" class="login-btn">
+Login
+</button>
+
+</form>
+
+<div class="register">
+Don't have an account? <a href="/register/">Register</a>
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="fw-bold mb-4">Dashboard</h2>
+
+<!-- TOP CARDS -->
+<div class="row g-4 mb-4">
+
+    <div class="col-md-3">
+        <div class="card dash-card">
+            <h6>Total Jobs</h6>
+            <h2>{{ total_jobs }}</h2>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card dash-card">
+            <h6>My Applications</h6>
+            <h2>{{ total_applications }}</h2>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card dash-card">
+            <h6>Saved Jobs</h6>
+            <h2>{{ total_saved }}</h2>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card dash-card">
+            <h6>Companies</h6>
+            <h2>{{ total_companies }}</h2>
+        </div>
+    </div>
+
+</div>
+
+<!-- STATUS CARDS -->
+<div class="row g-4 mb-4">
+
+    <div class="col-md-4">
+        <div class="card status-card pending">
+            <h6>Pending</h6>
+            <h2>{{ pending }}</h2>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card status-card accepted">
+            <h6>Accepted</h6>
+            <h2>{{ accepted }}</h2>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card status-card rejected">
+            <h6>Rejected</h6>
+            <h2>{{ rejected }}</h2>
+        </div>
+    </div>
+
+</div>
+
+<!-- RECENT APPLICATIONS -->
+<div class="card p-4 shadow-sm">
+
+<h5 class="fw-bold mb-3">Recent Applications</h5>
+
+{% for app in recent_apps %}
+
+<div class="d-flex justify-content-between border-bottom py-2">
+
+    <div>
+        <strong>{{ app.job.title }}</strong><br>
+        <small class="text-muted">{{ app.job.company.name }}</small>
+    </div>
+
+    <div>
+        {% if app.status == "Pending" %}
+            <span class="badge bg-warning text-dark">Pending</span>
+        {% elif app.status == "Accepted" %}
+            <span class="badge bg-success">Accepted</span>
+        {% elif app.status == "Rejected" %}
+            <span class="badge bg-danger">Rejected</span>
+        {% endif %}
+    </div>
+
+</div>
+
+{% empty %}
+
+<p class="text-muted text-center">No applications yet</p>
+
+{% endfor %}
+
+</div>
+
+
+<!-- STYLE -->
+<style>
+
+.dash-card {
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.dash-card:hover {
+    transform: translateY(-5px);
+}
+
+.status-card {
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.pending {
+    border: 2px solid orange;
+}
+
+.accepted {
+    border: 2px solid green;
+}
+
+.rejected {
+    border: 2px solid red;
+}
+
+</style>
+
+{% endblock %}

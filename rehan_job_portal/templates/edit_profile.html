@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+<div class="row justify-content-center">
+
+<div class="col-lg-8">
+
+<!-- PROFILE HEADER -->
+<div class="card shadow-sm border-0 mb-4 profile-header">
+
+    <div class="p-4 d-flex align-items-center">
+
+        <!-- Profile Image -->
+        <div class="me-4">
+            {% if profile.profile_pic %}
+                <img src="{{ profile.profile_pic.url }}" class="profile-img">
+            {% else %}
+                <i class="bi bi-person-circle profile-icon"></i>
+            {% endif %}
+        </div>
+
+        <!-- Info -->
+        <div>
+            <h4 class="fw-bold mb-1">{{ request.user.username }}</h4>
+            <p class="text-muted mb-1">{{ request.user.email }}</p>
+            <small class="text-muted">Update your professional profile</small>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- FORM CARD -->
+<div class="card shadow-lg border-0 p-4">
+
+<h4 class="fw-bold mb-4">Edit Profile</h4>
+
+<form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+
+<!-- PROFILE PHOTO -->
+<div class="mb-4">
+    <label class="form-label fw-semibold">Profile Photo</label>
+    <input type="file" name="profile_pic" class="form-control">
+</div>
+
+<!-- BIO -->
+<div class="mb-4">
+    <label class="form-label fw-semibold">About</label>
+    <textarea name="bio" class="form-control" rows="4" placeholder="Tell something about yourself...">{{ profile.bio }}</textarea>
+</div>
+
+<!-- SKILLS -->
+<div class="mb-4">
+    <label class="form-label fw-semibold">Skills</label>
+    <input type="text" name="skills" class="form-control" value="{{ profile.skills }}" placeholder="e.g. Python, Django, React">
+</div>
+
+<!-- EXPERIENCE -->
+<div class="mb-4">
+    <label class="form-label fw-semibold">Experience</label>
+    <textarea name="experience" class="form-control" rows="3" placeholder="Your experience...">{{ profile.experience }}</textarea>
+</div>
+
+<!-- LOCATION -->
+<div class="mb-4">
+    <label class="form-label fw-semibold">Location</label>
+    <input type="text" name="location" class="form-control" value="{{ profile.location }}">
+</div>
+
+<!-- BUTTON -->
+<div class="d-flex justify-content-between">
+
+    <a href="/profile/" class="btn btn-outline-secondary">
+        ← Back
+    </a>
+
+    <button type="submit" class="btn btn-primary px-4">
+        Save Changes
+    </button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- STYLE -->
+<style>
+
+.profile-header {
+    border-radius: 16px;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+}
+
+.profile-img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid white;
+}
+
+.profile-icon {
+    font-size: 80px;
+    color: white;
+}
+
+.card {
+    border-radius: 14px;
+}
+
+</style>
+
+{% endblock %}
